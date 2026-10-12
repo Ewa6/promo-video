@@ -1,0 +1,30 @@
+{
+  "name": "promo-video",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Product promo videos (Remotion), timed to an ElevenLabs voiceover",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "check": "node scripts/check.mjs",
+    "script": "node scripts/print-script.mjs",
+    "vo:guide": "node scripts/guide-voiceover.mjs",
+    "vo:import": "node scripts/import-voiceover.mjs",
+    "sync": "node scripts/sync.mjs",
+    "render": "node scripts/render.mjs",
+    "qa": "node scripts/qa.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.532",
+    "@remotion/google-fonts": "4.0.532",
+    "@remotion/install-whisper-cpp": "4.0.532",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remotion": "4.0.532"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "typescript": "7.0.2"
+  }
+}
