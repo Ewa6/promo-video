@@ -8,6 +8,11 @@ The instructions Claude follows are in [`SKILL.md`](SKILL.md); the scene catalog
 writing guide and script structure are in [`references/`](references/); the Remotion project that
 gets copied into each product repo is in [`template/`](template/).
 
+## Documentation
+
+New to the skill? Start with the [user documentation](docs/README.md): what the skill does, what you
+need, setup, a quick start, how-to guides, troubleshooting and FAQ.
+
 ## Install
 
 Personal (all your projects):
