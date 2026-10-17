@@ -1,0 +1,17 @@
+{
+  "name": "promo-video-docs-site",
+  "private": true,
+  "type": "module",
+  "description": "Static documentation site for the promo-video skill, built from ../docs",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node serve.mjs --watch",
+    "preview": "node build.mjs && node serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "marked": "15.0.12"
+  }
+}
