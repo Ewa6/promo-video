@@ -49,24 +49,17 @@ function heroArt() {
   }).join('');
   return `<svg class="hero-svg" viewBox="0 0 480 480" role="img" aria-label="">
     <defs>
-      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="9" result="b"/>
-        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <filter id="lift" x="-30%" y="-30%" width="160%" height="160%">
+        <feDropShadow class="lift" dx="0" dy="7" stdDeviation="5" flood-color="#020610" flood-opacity=".55"/>
       </filter>
-      <radialGradient id="core" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="#EDECF8" stop-opacity=".55"/>
-        <stop offset=".45" stop-color="#A096D9" stop-opacity=".18"/>
-        <stop offset="1" stop-color="#4464AD" stop-opacity="0"/>
-      </radialGradient>
     </defs>
     <g class="rings">
       <circle class="ring r1" cx="${c}" cy="${c}" r="212"/>
       <circle class="ring r2" cx="${c}" cy="${c}" r="146"/>
     </g>
     <g class="wave">${bars}</g>
-    <circle class="core" cx="${c}" cy="${c}" r="110" fill="url(#core)"/>
-    <g class="arcs" filter="url(#glow)">${arcs}</g>
-    <g class="play-btn" filter="url(#glow)">
+    <g class="arcs" filter="url(#lift)">${arcs}</g>
+    <g class="play-btn" filter="url(#lift)">
       <path d="M216 196v88a8 8 0 0 0 12.1 6.9l70-44a8 8 0 0 0 0-13.8l-70-44A8 8 0 0 0 216 196Z"/>
     </g>
   </svg>`;

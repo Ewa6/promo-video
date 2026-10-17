@@ -146,7 +146,7 @@ kbd { font: 500 11px/1 var(--font); padding: 4px 6px; border-radius: 6px; border
 [data-theme='dark'] .i-moon, [data-theme='light'] .i-sun { display: none; }
 
 .progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; }
-.progress span { display: block; height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(var(--p, 0)); background: var(--grad-line); box-shadow: 0 0 12px rgba(88, 193, 219, .6); }
+.progress span { display: block; height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(var(--p, 0)); background: var(--grad-line); }
 .is-home .progress { display: none; }
 
 /* ── Layout ─────────────────────────────────────────────────────────────── */
@@ -167,7 +167,7 @@ kbd { font: 500 11px/1 var(--font); padding: 4px 6px; border-radius: 6px; border
 .sidebar a.is-active { color: var(--heading); background: var(--bg-elev); font-weight: 550; }
 .sidebar a.is-active::before {
   content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; border-radius: 3px;
-  background: linear-gradient(180deg, #58C1DB, #4464AD, #A096D9); box-shadow: 0 0 10px rgba(88, 193, 219, .5);
+  background: linear-gradient(180deg, #58C1DB, #4464AD, #A096D9);
 }
 .layout-home .sidebar { display: none; }
 .scrim { display: none; }
@@ -324,13 +324,13 @@ kbd { font: 500 11px/1 var(--font); padding: 4px 6px; border-radius: 6px; border
 .wave g:nth-child(3n) line { stroke: #58C1DB; }
 .wave g:nth-child(4n) line { stroke: #A096D9; }
 @keyframes eq { from { transform: scaleY(.25); } to { transform: scaleY(1.15); } }
-.core { animation: breathe 5s ease-in-out infinite; transform-origin: 240px 240px; }
 .arcs { transform-origin: 240px 240px; animation: spin 48s linear infinite; }
 .arc { fill: none; stroke-width: 18; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; animation: draw 1.6s var(--ease) forwards; animation-delay: calc(.2s + var(--i) * .25s); }
 .dot { transform-box: fill-box; transform-origin: center; transform: scale(0); animation: pop .6s var(--ease) forwards; animation-delay: calc(.1s + var(--i) * .25s); }
 .arcs .a-teal { stroke: #58C1DB; fill: #58C1DB; }
 .arcs .a-purple { stroke: #7B6CC7; fill: #7B6CC7; }
 .arcs .a-blue { stroke: #4F78D1; fill: #4F78D1; }
+[data-theme='light'] .lift { flood-color: #162444; flood-opacity: .22; }
 .play-btn { fill: var(--play); transform-origin: 250px 240px; animation: breathe 5s ease-in-out infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes draw { to { stroke-dashoffset: 0; } }
@@ -373,9 +373,8 @@ kbd { font: 500 11px/1 var(--font); padding: 4px 6px; border-radius: 6px; border
 .stages { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
 .stages::before { content: ''; position: absolute; left: calc(100% / 14); right: calc(100% / 14); top: 22px; height: 2px; border-radius: 2px; background: var(--border-strong); }
 .stages::after {
-  content: ''; position: absolute; top: 18px; left: calc(100% / 14); width: 60px; height: 10px; border-radius: 10px; margin-left: -30px;
-  background: radial-gradient(closest-side, #A6E4F8, rgba(88, 193, 219, .6) 40%, transparent);
-  filter: blur(1px); animation: comet 9s cubic-bezier(.6, 0, .4, 1) infinite;
+  content: ''; position: absolute; top: 19px; left: calc(100% / 14); width: 8px; height: 8px; border-radius: 50%; margin-left: -4px;
+  background: #58C1DB; animation: comet 9s cubic-bezier(.6, 0, .4, 1) infinite;
 }
 @keyframes comet { 0% { left: calc(100% / 14); opacity: 0; } 8% { opacity: 1; } 88% { opacity: 1; } 100% { left: calc(100% - 100% / 14); opacity: 0; } }
 .stage { position: relative; text-align: center; z-index: 1; }
