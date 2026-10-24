@@ -193,6 +193,8 @@ async function build() {
 
   await fs.writeFile(path.join(OUT, 'assets', 'search.json'), JSON.stringify(searchIndex));
   for (const f of ['styles.css', 'site.js', 'favicon.svg']) await fs.copyFile(path.join(SRC, f), path.join(OUT, 'assets', f));
+  // Frames and a clip rendered from the template's example script (see media-src/README.md).
+  await fs.cp(path.join(SRC, 'media'), path.join(OUT, 'assets', 'media'), { recursive: true });
   await fs.writeFile(path.join(OUT, '.nojekyll'), '');
 
   console.log(`Built ${pages.size} pages into ${path.relative(process.cwd(), OUT) || OUT}`);

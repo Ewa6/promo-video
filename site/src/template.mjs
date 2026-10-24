@@ -37,39 +37,13 @@ export const mark = (size = 28) => {
   </svg>`;
 };
 
-function heroArt() {
-  const c = 240, r = 118;
-  const bars = Array.from({ length: 60 }, (_, i) => {
-    const len = 8 + Math.round(Math.abs(Math.sin(i * 1.7) * 14 + Math.sin(i * 0.45) * 8));
-    return `<g transform="rotate(${i * 6} ${c} ${c})"><line x1="${c}" y1="${c - 162}" x2="${c}" y2="${c - 162 - len}" style="--d:${((i * 137) % 60) / 40}s"/></g>`;
-  }).join('');
-  const arcs = ARCS.map(({ cls, from, to }, i) => {
-    const [dx, dy] = polar(c, c, r, from);
-    return `<g class="${cls}" style="--i:${i}"><path class="arc" pathLength="100" d="${arc(c, c, r, from, to)}"/><circle class="dot" cx="${dx}" cy="${dy}" r="15"/></g>`;
-  }).join('');
-  return `<svg class="hero-svg" viewBox="0 0 480 480" role="img" aria-label="">
-    <defs>
-      <filter id="lift" x="-30%" y="-30%" width="160%" height="160%">
-        <feDropShadow class="lift" dx="0" dy="7" stdDeviation="5" flood-color="#020610" flood-opacity=".55"/>
-      </filter>
-    </defs>
-    <g class="rings">
-      <circle class="ring r1" cx="${c}" cy="${c}" r="212"/>
-      <circle class="ring r2" cx="${c}" cy="${c}" r="146"/>
-    </g>
-    <g class="wave">${bars}</g>
-    <g class="arcs" filter="url(#lift)">${arcs}</g>
-    <g class="play-btn" filter="url(#lift)">
-      <path d="M216 196v88a8 8 0 0 0 12.1 6.9l70-44a8 8 0 0 0 0-13.8l-70-44A8 8 0 0 0 216 196Z"/>
-    </g>
-  </svg>`;
-}
-
-const CUTS = [
-  { label: 'Hero', meta: '60–90 s · 16:9', cls: 'cut-hero' },
-  { label: '30-second', meta: '16:9 · captions', cls: 'cut-30' },
-  { label: '15-second', meta: '16:9 · captions', cls: 'cut-15' },
-  { label: 'Vertical', meta: '15 s · 9:16', cls: 'cut-v' },
+// Frames from the example video in media/ (rendered from the template; see media-src/README.md).
+const FRAMES = [
+  { src: 'title.jpg', scene: 'Title', alt: 'Headline "Every update. One place." on a dark background' },
+  { src: 'problem.jpg', scene: 'Problem', alt: 'Spreadsheets, emails, a sticky note and a chat message scattered across the screen' },
+  { src: 'inbox.jpg', scene: 'Screen', alt: 'A mock app window with an inbox of three tasks and a cursor on the first one' },
+  { src: 'steps.jpg', scene: 'Steps', alt: 'Four steps on a ring: Plan, Assign, Review, Ship, around the words One flow' },
+  { src: 'endcard.jpg', scene: 'End card', alt: 'End card: Acme Cloud, Work, simplified, Book a demo' },
 ];
 
 // ── Shared chrome ─────────────────────────────────────────────────────────
@@ -176,7 +150,6 @@ export function page(ctx) {
 </head>
 <body class="${ctx.home ? 'is-home' : 'is-doc'}" data-root="${ctx.root}">
 <a class="skip" href="#content">Skip to content</a>
-<div class="backdrop" aria-hidden="true"><span class="glow g1"></span><span class="glow g2"></span><span class="glow g3"></span></div>
 ${header(ctx)}
 <div class="layout${ctx.home ? ' layout-home' : ''}" id="top">
 ${sidebar(ctx)}
@@ -217,10 +190,9 @@ ${ctx.body}
 }
 
 export function homeBody(ctx) {
-  const card = (file, n) => {
+  const card = (file) => {
     const c = ctx.cards[file];
     return `<li class="reveal"><a class="card" href="${c.href}">
-      ${n ? `<span class="card-num">${String(n).padStart(2, '0')}</span>` : ''}
       <span class="card-title">${esc(c.title)}</span>
       <span class="card-lead">${esc(clip(c.lead))}</span>
       <span class="card-go">${svgIcon.arrow}</span>
@@ -230,25 +202,31 @@ export function homeBody(ctx) {
   return `<main class="home" id="content">
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-copy">
-      <p class="kicker"><span class="live-dot" aria-hidden="true"></span>Claude Code skill · User documentation</p>
-      <h1 id="hero-title"><span class="grad">Promo video</span> skill</h1>
-      <div class="rule" aria-hidden="true"></div>
+      <h1 id="hero-title">Promo video skill</h1>
       <p class="hero-lead">${esc(ctx.lead)}</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="quick-start.html">Make your first video ${svgIcon.arrow}</a>
         <a class="btn btn-ghost" href="overview.html">What the skill does</a>
       </div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      ${heroArt()}
-      ${CUTS.map((c) => `<div class="cut ${c.cls}"><span class="cut-frame"><span class="cut-play"></span></span><span class="cut-text"><b>${c.label}</b><small>${c.meta}</small></span><span class="cut-bar"><i></i></span></div>`).join('')}
+    <figure class="hero-media">
+      <video src="assets/media/demo.mp4" poster="assets/media/dashboard.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Example promo video for a sample product, Acme Cloud, without sound"></video>
+      <figcaption>Example output: a 30-second video for a sample product, Acme Cloud, rendered from the skill's template.</figcaption>
+    </figure>
+  </section>
+
+  <section class="frames" aria-labelledby="frames-title">
+    <h2 id="frames-title">What a finished video looks like</h2>
+    <p class="section-lead">Frames from the example above. Each frame is one scene from the skill's library, timed to the voiceover. The vertical cut adds burned-in captions.</p>
+    <div class="frames-grid">
+      <ul class="frames-strip">${FRAMES.map((f) => `<li class="reveal"><figure><img src="assets/media/${f.src}" alt="${esc(f.alt)}" width="1280" height="720" loading="lazy"><figcaption>${esc(f.scene)}</figcaption></figure></li>`).join('')}</ul>
+      <figure class="frame-vertical reveal"><img src="assets/media/vertical.jpg" alt="Vertical 9:16 frame: Acme Cloud, Brings it all together, with a caption at the bottom" width="540" height="960" loading="lazy"><figcaption>Vertical cut, 9:16</figcaption></figure>
     </div>
   </section>
 
   <section class="pipeline reveal" aria-labelledby="pipeline-title">
     <div class="section-head">
       <h2 id="pipeline-title">The same stages, every time</h2>
-      <span class="line" aria-hidden="true"></span>
     </div>
     <p class="section-lead">Claude does the research, writing, animation, and checking. It stops twice and waits for your decision. <a href="how-it-works.html">How a promo video gets made</a></p>
     <ol class="stages">
@@ -260,18 +238,18 @@ export function homeBody(ctx) {
   </section>
 
   <section class="home-section" aria-labelledby="start-title">
-    <div class="section-head"><h2 id="start-title">Where to start</h2><span class="line" aria-hidden="true"></span></div>
+    <div class="section-head"><h2 id="start-title">Where to start</h2></div>
     <p class="section-lead">New to the skill? Read these pages in order.</p>
-    <ol class="cards cards-4">${start.pages.map((p, i) => card(p.file, i + 1)).join('')}</ol>
+    <ol class="cards cards-4">${start.pages.map((p) => card(p.file)).join('')}</ol>
   </section>
 
   <section class="home-section" aria-labelledby="make-title">
-    <div class="section-head"><h2 id="make-title">${esc(make.title)}</h2><span class="line" aria-hidden="true"></span></div>
+    <div class="section-head"><h2 id="make-title">${esc(make.title)}</h2></div>
     <ul class="cards cards-2">${make.pages.map((p) => card(p.file)).join('')}</ul>
   </section>
 
   <section class="home-section" aria-labelledby="help-title">
-    <div class="section-head"><h2 id="help-title">${esc(help.title)}</h2><span class="line" aria-hidden="true"></span></div>
+    <div class="section-head"><h2 id="help-title">${esc(help.title)}</h2></div>
     <ul class="cards cards-3">${help.pages.map((p) => card(p.file)).join('')}</ul>
   </section>
 </main>`;
