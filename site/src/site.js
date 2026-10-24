@@ -73,17 +73,9 @@
     });
   } else reveals.forEach((el) => el.classList.add('in'));
 
-  // Hero parallax: the art leans gently towards the pointer
-  const art = document.querySelector('.hero-art');
-  if (art && !reduced && matchMedia('(pointer: fine)').matches) {
-    const hero = document.querySelector('.hero');
-    hero.addEventListener('pointermove', (e) => {
-      const r = hero.getBoundingClientRect();
-      art.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
-      art.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
-    });
-    hero.addEventListener('pointerleave', () => { art.style.setProperty('--mx', 0); art.style.setProperty('--my', 0); });
-  }
+  // Hero video: no autoplay for readers who ask for reduced motion; they get the poster and controls
+  const video = document.querySelector('.hero-media video');
+  if (video && reduced) { video.removeAttribute('autoplay'); video.pause(); video.controls = true; }
 
   // Search
   const box = document.querySelector('.search');
