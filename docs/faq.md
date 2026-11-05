@@ -22,11 +22,18 @@ The skill itself is free. You might pay for:
 
 ### Does it work on Windows?
 
-Windows support isn't confirmed. The skill's setup uses tools that are standard on macOS and Linux. On any computer other than a Mac, the robotic preview voice isn't available, so drafts are silent and their timing is estimated.
+Yes. A full video has been made with the skill on Windows 11. Two things work differently there:
+
+- The robotic preview voice works only on a Mac. On Windows, drafts are silent and their timing is estimated.
+- The final check makes single pictures instead of one contact sheet, unless you install the full ffmpeg (a video tool) yourself. Claude looks at the single pictures instead.
+
+You don't need make on Windows: the speech-timing tool is downloaded ready-made.
 
 ### Can I make a video in a language other than English?
 
-Only English is supported reliably. The tool that matches the voice to the script recognizes English only, so the pictures and captions might not line up with a voice in another language.
+Yes. Tell Claude the language of the voice. Claude writes it in the project, and the tool that matches the voice to the script then uses a speech model that knows many languages. It was tested with Polish: 98% of the words matched.
+
+The first time, that model is a bigger download (about 470 MB) than the English-only one.
 
 ## Voice
 

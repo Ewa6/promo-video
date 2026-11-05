@@ -25,6 +25,8 @@ Claude Code runs the video tools on your computer, so they need to be installed 
    make --version
    ```
 
+   On Windows, skip `make --version`: you don't need make.
+
    On a Mac, if either command isn't found, install the Xcode Command Line Tools:
 
    ```bash
@@ -89,7 +91,7 @@ You don't need to do anything else now. When you make your first video, Claude:
 
 - creates the video project inside your product's folder;
 - downloads the video tools, which needs an internet connection;
-- builds the speech-timing tool. This takes about a minute and happens only once per computer.
+- builds the speech-timing tool (on Windows, downloads it ready-made). This takes about a minute and happens only once per computer.
 
 ## Update the skill
 

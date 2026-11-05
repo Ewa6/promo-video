@@ -51,7 +51,7 @@ Claude fixes most problems by itself and tells you only about the ones that need
 
 **Problem:** The first time Claude times a video to its voice, the step fails while it builds a tool called whisper.cpp.
 
-**Likely cause:** git or make isn't installed. The speech-timing tool is built from source the first time and needs both.
+**Likely cause:** git or make isn't installed. On a Mac or Linux, the speech-timing tool is built from source the first time and needs both. (On Windows it's downloaded ready-made, so check the internet connection instead.)
 
 **Solution:**
 
