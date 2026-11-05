@@ -30,7 +30,7 @@ Claude runs these tools for you, but they must be installed on your computer:
 |---|---|---|
 | Node.js, version 22.18 or later, with npm | Runs the video project | In a terminal, run `node -v`. The result must be `v22.18.0` or later. |
 | git | Installs the skill and builds the speech-timing tool | Run `git --version`. |
-| make | Builds the speech-timing tool the first time | Run `make --version`. On a Mac, installing the Xcode Command Line Tools adds it. |
+| make (Mac and Linux only) | Builds the speech-timing tool the first time | Run `make --version`. On a Mac, installing the Xcode Command Line Tools adds it. On Windows you don't need it: the tool is downloaded ready-made. |
 
 A *terminal* is the app where you type commands, such as Terminal on a Mac. If you prefer, ask Claude to run these checks for you.
 
